@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .product {
+  margin-bottom: 20px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.quantity {
+  margin: 0 10px;
+}
+
+</style>
+<body>
+    
+    <div class="product">
+        <h2>Product Name</h2>
+        <p>Price: $<span class="price">10.00</span></p>
+        <button class="subtractBtn">-</button>
+        <span class="quantity">1</span>
+        <button class="addBtn">+</button>
+        <button class="addToCartBtn">Add to Cart</button>
+      </div>
+      
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+  const subtractButtons = document.querySelectorAll('.subtractBtn');
+  const addButtons = document.querySelectorAll('.addBtn');
+  const quantityInputs = document.querySelectorAll('.quantity');
+  const addToCartButtons = document.querySelectorAll('.addToCartBtn');
+  
+  subtractButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      let currentQuantity = parseInt(quantityInputs[index].textContent);
+      if (currentQuantity > 1) {
+        quantityInputs[index].textContent = currentQuantity - 1;
+      }
+    });
+  });
+  
+  addButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      let currentQuantity = parseInt(quantityInputs[index].textContent);
+      quantityInputs[index].textContent = currentQuantity + 1;
+    });
+  });
+  
+  addToCartButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      const productName = document.querySelectorAll('.product h2')[index].textContent;
+      const price = parseFloat(document.querySelectorAll('.product .price')[index].textContent);
+      const quantity = parseInt(quantityInputs[index].textContent);
+      const totalPrice = price * quantity;
+      alert(`Added ${quantity} ${productName}(s) to cart. Total Price: $${totalPrice.toFixed(2)}`);
+      // Here you can add the product to the cart
+    });
+  });
+});
+
+      </script>
+</body>
+</html>
